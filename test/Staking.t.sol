@@ -26,7 +26,8 @@ contract StakingTest is Helpers {
     function setUp() public {
         (uOne, privKeyA) = mkaddr("USERA");
         (uTwo, privKeyB) = mkaddr("USERB");
-        vm.startPrank(uOne);
+
+        switchSigner(uOne);
 
         Wblessed = new BlessedWETH();
         blessed = new Blessed();
@@ -39,15 +40,11 @@ contract StakingTest is Helpers {
             optedForCompounding: false
         });
 
-        console2.logUint(blessed.balanceOf(uOne));
         weth = IWETH(WETH_ADDRESS);
-        // weth.deposit{value: 5 ether}();
     }
 
     function testFuzz_stakeETHValue(uint256 x) public payable {
-        // counter.setNumber(x);
         staking.stakeETH{value: x}();
-        // assertEq(counter.number(), x);
     }
 
     function testStakeEthNoValue() public payable {
@@ -67,5 +64,8 @@ contract StakingTest is Helpers {
     function testCompoundRewards() public {
         stake.stakedAmount = 0;
         vm.expectRevert(Staking.NoStakedWETH.selector);
+        staking.compoundRewards();
     }
+
+    function testRewardsToCompound() public {}
 }

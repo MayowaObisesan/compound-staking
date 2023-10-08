@@ -8,6 +8,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "./Blessed.sol";
 import "./BlessedWETH.sol";
 import "./interface/IWETH.sol";
+import {console2} from "forge-std/Test.sol";
 
 contract Staking {
     // using Math for uint256;
@@ -56,6 +57,7 @@ contract Staking {
         // weth.transferFrom(msg.sender, address(this), ethAmount);
 
         // Convert ETH TO WETH
+        console2.logUint(msg.value);
         weth.deposit{value: ethAmount}();
 
         // Mint "Blessed-WETH" tokens to the user
