@@ -53,8 +53,8 @@ contract Staking {
         if (ethAmount <= 0) revert NoStakeValue();
 
         // Convert ETH TO WETH
-        console2.logUint(msg.value);
         weth.deposit{value: ethAmount}();
+        console2.logUint(msg.value);
 
         // Mint "Blessed-WETH" tokens to the user
         Wblessed.mint(msg.sender, ethAmount * 10); // 1 ETH = 10 Blessed tokens

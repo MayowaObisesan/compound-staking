@@ -25,7 +25,7 @@ abstract contract Helpers is Test {
         //     vm.startPrank(_newSigner);
         // }
         vm.startPrank(_newSigner);
-        vm.deal(_newSigner, 5 ether);
+        vm.deal(_newSigner, 500 ether);
         vm.label(_newSigner, "USER");
     }
 }
