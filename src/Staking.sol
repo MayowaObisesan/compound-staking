@@ -51,10 +51,6 @@ contract Staking {
     function stakeETH() external payable {
         uint256 ethAmount = msg.value;
         if (ethAmount <= 0) revert NoStakeValue();
-        // require(ethAmount > 0, "Amount must be greater than 0");
-
-        // Transfer ETH from the user to the contract
-        // weth.transferFrom(msg.sender, address(this), ethAmount);
 
         // Convert ETH TO WETH
         console2.logUint(msg.value);
@@ -80,7 +76,6 @@ contract Staking {
         uint256 rewardsToCompound = calculateRewardsToCompound(msg.sender);
 
         if (rewardsToCompound <= 0) revert NoRewardToCompound();
-        // require(rewardsToCompound > 0, "No rewards to compound");
 
         uint256 fee = (rewardsToCompound * compoundingFeePercentage) / 100;
 
@@ -104,7 +99,6 @@ contract Staking {
         Stake storage staker = stakers[msg.sender];
 
         if (staker.stakedAmount <= 0) revert NoStakedWETH();
-        // require(staker.stakedAmount > 0, "No staked WETH");
 
         uint256 rewardsToWithdraw = staker.totalRewards;
 
