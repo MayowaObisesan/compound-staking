@@ -41,6 +41,7 @@ contract StakingTest is Helpers {
         });
 
         weth = IWETH(WETH_ADDRESS);
+        payable(uOne).transfer(10 ether);
     }
 
     function testFuzz_stakeETHValue(uint256 x) public payable {
